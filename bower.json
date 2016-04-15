@@ -1,0 +1,8 @@
+{
+  "name": "lean-ng",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.5.3",
+    "todostore": "lean-stack/todo-ng-store"
+  }
+}
