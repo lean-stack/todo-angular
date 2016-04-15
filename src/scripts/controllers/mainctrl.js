@@ -4,8 +4,8 @@
   // Module Getter
   var app = angular.module('todoApp');
 
-  MainController.$inject = ['todoStorePromise'];
-  function MainController(store)
+  MainController.$inject = ['$scope','todoStorePromise','notifier'];
+  function MainController($scope, store, notifier)
   {
     var vm = this;
 
@@ -17,6 +17,7 @@
       store.create(vm.todoTxt).then(function(todo) {
         vm.todos.push(todo);
         vm.todoTxt = '';
+        notifier.show({ type: 'success', msg: 'Todo created' });
       });
     };
 
@@ -28,7 +29,9 @@
     vm.endEdit = function(t) {
       delete t.oldValue;
       delete t.editing;
-      store.update(t);
+      store.update(t).then(function(todo) {
+        notifier.show({ type: 'success', msg: 'Todo updated' });
+      });
     }
 
     vm.cancelEdit = function(t) {
@@ -40,15 +43,17 @@
       delete t.editing;
     }
 
-    vm.toggleState = function(t) {
-      //t.completed = !t.completed;
-      store.update(t);
+    vm.updateTodo = function(t) {
+      store.update(t).then(function(todo) {
+        notifier.show({ type: 'success', msg: 'Todo updated' });
+      });
     }
 
     vm.deleteTodo = function(t) {
       store.delete(t).then(function() {
         var ix = vm.todos.indexOf(t);
         vm.todos.splice(ix,1);
+        notifier.show({ type: 'warning', msg: 'Todo gelöscht' });
       });
     }
   }

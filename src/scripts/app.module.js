@@ -10,7 +10,7 @@
         console.log('--> Configuring lean angular app ...');
     });
 
-    app.run(function () {
+    app.run(function (notifier) {
         console.log('--> Lean app started.')
     });
 

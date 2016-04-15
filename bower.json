@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "angular": "^1.5.3",
-    "todostore": "lean-stack/todo-ng-store"
+    "todostore": "lean-stack/todo-ng-store",
+    "toastr": "^2.1.2"
   }
 }
